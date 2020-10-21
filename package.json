@@ -1,0 +1,26 @@
+{
+  "name": "mern-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd server && npm start",
+    "react-dev": "cd client && npm start",
+    "test": "cd server && npm test",
+    "preinstall": "cd server && npm install",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "description": "This project is a template for building full-stack JavaScript applications running on node.js. The technology stack is as follows:\r - **React** for the front-end, bootstrapped with \"Create React App\".\r - **express.js** for the server\r   - serves the React app \r   - provides the JSON API for the React app using http",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flamiga/QnA.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Flamiga/QnA/issues"
+  },
+  "homepage": "https://github.com/Flamiga/QnA#readme"
+}
