@@ -15,15 +15,17 @@ function App() {
   useEffect(() => {
     async function getData() {
       const url = `${API_URL}/QnA`;
+      console.log("url", url);
       const response = await fetch(url);
       const data = await response.json();
       setQuestion(data);
+      console.log("question", question);
     }
     getData();
   }, []);
   
   function getQuestion(id) {
-    const questionObject = question.find(data => data.id === parseInt(id));
+    const questionObject = question.find(data => data._id === id);
     return questionObject;
   }
 
@@ -52,13 +54,11 @@ function App() {
       <h1>Q n' A App!</h1>
 
       <Router>
-        <QuestionList path="/" questions={question}>{question.title}</QuestionList>
+        <QuestionList path="/" questions={question}>{question._id}</QuestionList>
         <Question path="/QnA/:id" getQuestion={getQuestion}></Question>
-
+        <AddQuestion path="/" addQuestion={addQuestion}></AddQuestion>
       </Router>
-      <Router>    
-      <AddQuestion path="/" addQuestion={addQuestion}></AddQuestion>
-        </Router>
+    
 
     </>
   );

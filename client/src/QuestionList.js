@@ -5,7 +5,7 @@ function QuestionList(props){
 let questions = props.questions;
 
 let mapFunction = element =>
-<Link to={`/QnA/${element.title}`} key={element.title}>
+<Link to={`/QnA/${element._id}`} key={element.title}>
   <li>{element.title}</li>
 </Link>;
 

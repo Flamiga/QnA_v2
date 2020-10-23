@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "@reach/router"
 
 function Question(props){
-const question = props.getQuestion(props.id); 
+const question = props.getQuestion(props._id); 
 /*let list = question.answers.map(answer =>
     <li key={answer}>{answer}</li>);*/
 return(
