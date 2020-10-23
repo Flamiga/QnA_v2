@@ -23,7 +23,7 @@ function App() {
     }
     getData();
   }, []);
-  
+
   function getQuestion(id) {
     const questionObject = question.find(data => data._id === id);
     return questionObject;
@@ -46,9 +46,6 @@ function App() {
     setQuestion([...question, newAnswer])
   }
 
-
-
-
   return (
     <>
       <h1>Q n' A App!</h1>
@@ -56,10 +53,12 @@ function App() {
       <Router>
         <QuestionList path="/" questions={question}>{question._id}</QuestionList>
         <Question path="/QnA/:id" getQuestion={getQuestion}></Question>
-        <AddQuestion path="/" addQuestion={addQuestion}></AddQuestion>
       </Router>
-    
 
+      <Router>
+        <AddQuestion path="/" addQuestion={addQuestion}></AddQuestion>
+
+      </Router>
     </>
   );
 };

@@ -39,7 +39,7 @@ module.exports = (mongoose) => {
       if (l === 0) {
         let promises = [];
         for (let i = 0; i < count; i++) {
-          let newQuestion = new QnAModel({ title: `Question number ${i}`, answers:[{text: `Answer ${i}`, votes: i}]
+          let newQuestion = new QnAModel({ title: `Question number ${i}`, description:`Description ${i}`,  answers:[{text: `Answer ${i}`, votes: i}]
         });
           promises.push(newQuestion.save());
         }

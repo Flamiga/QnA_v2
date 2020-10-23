@@ -1,6 +1,6 @@
-const questionDB = require("./questionDB");
+//const questionDB = require("./questionDB");
 
-module.exports = (mongoose) => {
+module.exports = (questionDB) => {
 
 
   const express = require("express");
@@ -8,8 +8,8 @@ module.exports = (mongoose) => {
 
   /**** Routes ****/
   router.get('/', async (req, res) => {
-    const question = await questionDB.getQuestions(); 
-    res.json(question);
+    const questions = await questionDB.getQuestions(); 
+    res.json(questions);
   });
 
   router.get('/:id', async (req, res) => {
