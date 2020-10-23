@@ -1,20 +1,26 @@
 import React from 'react';
-import { Link } from "@reach/router"
+import { Link, Router } from "@reach/router"
+import AddAnswer from './AddAnswer';
+
 
 function Question(props) {
     const id = props.id
     const question = props.getQuestion(id);
-    /*let list = question.answers.map(answer =>
-        <li key={answer}>{answer}</li>);*/
+
     return (
         <>
             <Link to="/">Home</Link>
             <h2>{question.title}</h2>
             <p>Description: {question.description}</p>
-
+            <h3>Add an answer</h3>
+            <Router>
+                <AddAnswer path="/" addAnswer={props.AddAnswer}></AddAnswer>
+            </Router>
         </>
 
-    )
+
+    );
+
 };
 
-export default Question;
+export default Question; 

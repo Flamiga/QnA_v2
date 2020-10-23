@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import AddQuestion from './AddQuestion';
 import QuestionList from './QuestionList';
 import { Router } from "@reach/router";
 import Question from './Question';
@@ -39,26 +38,24 @@ function App() {
     setQuestion([...question, newQuestion])
   }
 
-  function addAnswer(text) {
+  function addAnswer(text, questionId){
     const newAnswer = {
-      text: text
-    };
-    setQuestion([...question, newAnswer])
-  }
+      text: text,
+      questionId: questionId
+    }
+  setQuestion([...question, newAnswer])
+}
+
 
   return (
     <>
       <h1>Q n' A App!</h1>
 
       <Router>
-        <QuestionList path="/" questions={question}>{question._id}</QuestionList>
-        <Question path="/QnA/:id" getQuestion={getQuestion}></Question>
+        <QuestionList path="/" questions={question} >{question._id}</QuestionList>
+        <Question path="/QnA/:id" getQuestion={getQuestion} addAnswer={addAnswer}></Question>
       </Router>
 
-      <Router>
-        <AddQuestion path="/" addQuestion={addQuestion}></AddQuestion>
-
-      </Router>
     </>
   );
 };
