@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import QuestionList from './QuestionList';
 import { Router } from "@reach/router";
 import Question from './Question';
+import AddQuestion from './AddQuestion';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
     setQuestion([...question, newQuestion])
   }
 
+  //callback så min addQuestion ved hvor den skal hente data fra
   function addAnswer(text, questionId){
     const newAnswer = {
       text: text,
@@ -52,7 +54,7 @@ function App() {
       <h1>Q n' A App!</h1>
 
       <Router>
-        <QuestionList path="/" questions={question} >{question._id}</QuestionList>
+        <QuestionList path="/" questions={question} addQuestion={addQuestion} >{question._id}</QuestionList>
         <Question path="/QnA/:id" getQuestion={getQuestion} addAnswer={addAnswer}></Question>
       </Router>
 

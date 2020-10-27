@@ -8,7 +8,7 @@ module.exports = (questionDB) => {
 
   /**** Routes ****/
   router.get('/', async (req, res) => {
-    const questions = await questionDB.getQuestions(); 
+    const questions = await questionDB.getQuestions();
     res.json(questions);
   });
 
@@ -17,10 +17,11 @@ module.exports = (questionDB) => {
     res.json(question);
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/:id', async (req, res) => {
     // TODO: Implement!
-    const question = await questionDB.createQuestion();
-    res.json({msg: "Not implemented :("});
+    const question = await questionDB.getQuestion(req.params.id);
+
+    res.json(question);
   });
 
   return router;
