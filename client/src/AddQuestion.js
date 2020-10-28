@@ -12,13 +12,12 @@ function AddQuestion(props) {
                 setTitle(event.target.value)
             }
             } /><br /><label>Description: </label>
-            <input type="text" placeholder="Write the dscription..." size="30" onChange={(event) => {
+            <input type="text" placeholder="Write the description..." size="30" onChange={(event) => {
                 setDescription(event.target.value)
             }} />
             <br />
             <button onClick={(event) => props.addQuestion(title, description)}>Add Question</button>
-
-       
+  
 
         </>
     );

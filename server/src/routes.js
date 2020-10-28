@@ -17,9 +17,9 @@ module.exports = (questionDB) => {
     res.json(question);
   });
 
-  router.post('/:id', async (req, res) => {
+  router.post('/', async (req, res) => {
     // TODO: Implement!
-    const question = await questionDB.getQuestion(req.params.id);
+    const question = await questionDB.createQuestion();
 
     res.json(question);
   });

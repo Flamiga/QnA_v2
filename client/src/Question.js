@@ -14,7 +14,7 @@ function Question(props) {
             <p>Description: {question.description}</p>
             <h3>Add an answer</h3>
             <Router>
-                <AddAnswer path="/" addAnswer={props.AddAnswer}></AddAnswer>
+                <AddAnswer path="/" addAnswer={props.addAnswer}></AddAnswer>
             </Router>
         </>
 

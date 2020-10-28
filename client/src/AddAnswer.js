@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 function AddAnswer(props) {
     //state const for hver properties i din object(answer)
       const [answer, setAnswer] = useState("");

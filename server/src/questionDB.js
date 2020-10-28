@@ -27,8 +27,8 @@ module.exports = (mongoose) => {
       }
     }
 
-    async function createQuestion(text) {
-      let question = new QnAModel({ title: "test", description: "test", answers: [answer, answer] });
+    async function createQuestion(title, description) {
+      let question = new QnAModel({ title: title, description: description, answers: [] });
       return question.save();
     }
 
