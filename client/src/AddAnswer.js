@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 function AddAnswer(props) {
     //state const for hver properties i din object(answer)
-      const [answer, setAnswer] = useState("");
       const [text, setText] = useState(""); 
-      const [questionId, setQuestionId] = useState("");
+      //const [questionId, setQuestionId] = useState("");
   
       
       
@@ -13,7 +12,7 @@ function AddAnswer(props) {
             <input type="text" placeholder="Write an answer..." size="30" onChange={(event) => {
                 setText(event.target.value)
             }} />
-            <button onClick={(event) => props.addAnswer(text, questionId)}>Add an answer</button>
+            <button onClick={(event) => props.addAnswer(text, props.id)}>Add an answer</button>
 
         </>
     );

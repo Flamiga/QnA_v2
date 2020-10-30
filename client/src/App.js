@@ -7,8 +7,8 @@ const API_URL = process.env.REACT_APP_API;
 
 function App() {
   const [question, setQuestion] = useState([]);
-
-  const [answer, setAnswer] = useState([]);
+  const [postCount, setPostCount] = useState(0);
+ // const [answer, setAnswer] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +20,7 @@ function App() {
       console.log("question", question);
     }
     fetchData();
-  }, []);
+  }, [postCount]); // Fetch hver gang den post'er
 
   function getQuestion(id) {
     const questionObject = question.find(data => data._id === id);
@@ -30,34 +30,38 @@ function App() {
 
   //callback så min addQuestion ved hvor den skal hente data fra
   async function addQuestion(title, description) {
-    console.log(title, description)
+    console.log(title, description);
 
     const newQuestion = {
       title: title,
       description: description,
     }
-    setQuestion([...question, newQuestion])
     
     const url = `${API_URL}/QnA`;
     const response = await fetch(url, {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({title, description}),
+      body: JSON.stringify(newQuestion),
     });
     const data = await response.json();
+    //setQuestion([...question, newQuestion]);
+    setPostCount(postCount + 1);
     console.log("data",data);
-  
-
   }
 
-  //callback så min addQuestion ved hvor den skal hente data fra
-  function addAnswer(text, questionId) {
-    const newAnswer = {
-      text: text,
-      questionId: questionId
-    }
-
-    setAnswer([...answer, newAnswer])
+  //callback så min addAnswer ved hvor den skal hente data fra
+  async function addAnswer(text, questionId) {
+    console.log(text, questionId)
+   
+    const url = `${API_URL}/QnA/${questionId}/answers`;
+    const response = await fetch(url, {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({text: text}),
+    });
+    const data = await response.json();
+    setPostCount(postCount + 1);
+    console.log("answer",data);
   }
 
 

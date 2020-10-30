@@ -18,11 +18,24 @@ module.exports = (questionDB) => {
   });
 
   router.post('/', async (req, res) => {
-    // TODO: Implement!
-    const question = await questionDB.createQuestion();
+    let title = req.body.title;
+    let description = req.body.description;
+    const question = await questionDB.createQuestion(title, description);
 
     res.json(question);
   });
+
+  /***ANSWERS*** */
+
+  // POST /api/question/answers/:id
+  router.post('/:id/answers', async (req, res) => {
+
+    let text = req.body.text;
+    let questionId = req.params.id;
+    const answer = await questionDB.createAnswer(text, questionId);
+    res.json(answer);
+  });
+
 
   return router;
 }
