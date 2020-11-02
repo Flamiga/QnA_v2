@@ -12,6 +12,7 @@ function AddAnswer(props) {
             <input type="text" placeholder="Write an answer..." size="30" onChange={(event) => {
                 setText(event.target.value)
             }} />
+
             <button onClick={(event) => props.addAnswer(text, props.id)}>Add an answer</button>
 
         </>

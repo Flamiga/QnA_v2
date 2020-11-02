@@ -46,7 +46,7 @@ function App() {
     const data = await response.json();
     //setQuestion([...question, newQuestion]);
     setPostCount(postCount + 1);
-    console.log("data",data);
+    console.log("Question",data);
   }
 
   //callback så min addAnswer ved hvor den skal hente data fra
@@ -64,6 +64,21 @@ function App() {
     console.log("answer",data);
   }
 
+  //callbackfunction
+  async function addVote(vote, questionId, answerId){
+    console.log(questionId, answerId);
+    const url = `${API_URL}/QnA/${questionId}/answers/${answerId}/votes`;
+    const response = await fetch(url, {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({vote:vote})
+    });
+    const data = await response.json();
+    setPostCount(postCount + 1);
+    console.log("votes",data);
+
+  }
+
 
   return (
     <>
@@ -71,7 +86,7 @@ function App() {
 
       <Router>
         <QuestionList path="/" questions={question} addQuestion={addQuestion} >{question._id}</QuestionList>
-        <Question path="/QnA/:id" getQuestion={getQuestion} addAnswer={addAnswer}></Question>
+        <Question path="/QnA/:id" getQuestion={getQuestion} addAnswer={addAnswer} addVote={addVote}></Question>
       </Router>
 
     </>

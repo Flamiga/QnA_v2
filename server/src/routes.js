@@ -36,6 +36,13 @@ module.exports = (questionDB) => {
     res.json(answer);
   });
 
+  router.post('/:questionId/answers/:answerId/votes', async (req, res) =>{
+    let questionId = req.params.questionId; 
+    let answerId = req.params.answerId; 
+    const vote = await questionDB.voteAnswer(questionId, answerId); 
+    res.json(vote);
+  })
+
 
   return router;
 }

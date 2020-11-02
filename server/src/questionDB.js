@@ -20,6 +20,7 @@ module.exports = (mongoose) => {
   }
 
   async function getQuestion(id) {
+    console.log("getquestion id", id);
     try {
       return await QnAModel.findById(id);
     } catch (error) {
@@ -33,15 +34,30 @@ module.exports = (mongoose) => {
     return question.save();
   }
 
+  async function getAnswer(id) {
+    try {
+      return await QnAModel.findById(id);
+    } catch (error) {
+      console.log("getAnswer: ", error.message);
+      return {};
+    }
+  }
+
   async function createAnswer(answer, questionId) {
     //finder question
     const question = await getQuestion(questionId);
-    //lav spørgsmålet
+    //lav svaret
     let newAnswer = { text: answer, vote: 0 }
     //indsætter answer i array
     question.answers.push(newAnswer)
     //save quesiton igen
     return question.save();
+  }
+
+  async function voteAnswer(questionId, answerId) {
+    const answer = await getAnswer(questionId, answerId);
+    answer.vote += 1;
+    return answer.save();
   }
 
   async function bootstrap(count) {
@@ -64,7 +80,9 @@ module.exports = (mongoose) => {
     getQuestions,
     getQuestion,
     createQuestion,
+    getAnswer,
     createAnswer,
+    voteAnswer,
     bootstrap
   }
 }

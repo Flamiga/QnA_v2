@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "@reach/router"
 import AddAnswer from './AddAnswer';
+import AddVotes from './AddVotes';
 
 
 function Question(props) {
@@ -8,7 +9,7 @@ function Question(props) {
     const question = props.getQuestion(id);
 
     let answerList = question.answers.map(answer =>
-        <li key={answer._id}>{answer.text}</li>)
+        <li key={answer._id}>{answer.text} <AddVotes addVote={answer.vote}></AddVotes></li>)
 
     return (
         <>
@@ -19,7 +20,7 @@ function Question(props) {
             <ul>{answerList}</ul>
             <h3>Add an answer</h3>
             <AddAnswer id={question._id} addAnswer={props.addAnswer}></AddAnswer>
-
+ 
         </>
 
 
