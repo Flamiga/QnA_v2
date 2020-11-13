@@ -29,11 +29,6 @@ module.exports = (mongoose) => {
     }
   }
 
-  async function createQuestion(title, description) {
-    let question = new QnAModel({ title: title, description: description, answers: [] });
-    return question.save();
-  }
-
   async function getAnswer(id) {
     try {
       return await QnAModel.findById(id);
@@ -41,6 +36,11 @@ module.exports = (mongoose) => {
       console.log("getAnswer: ", error.message);
       return {};
     }
+  }
+
+  async function createQuestion(title, description) {
+    let question = new QnAModel({ title: title, description: description, answers: [] });
+    return question.save();
   }
 
   async function createAnswer(answer, questionId) {
@@ -60,7 +60,7 @@ module.exports = (mongoose) => {
     return answer.save();
   }
 
-  async function bootstrap(count) {
+  async function bootstrap(count = 10) {
     let l = (await getQuestions()).length;
     console.log("Question collection size:", l);
 

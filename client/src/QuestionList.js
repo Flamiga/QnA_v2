@@ -1,5 +1,4 @@
 import React from 'react';
-import {Router} from "@reach/router";
 import { Link } from "@reach/router";
 import AddQuestion from './AddQuestion';
 
@@ -11,7 +10,7 @@ function QuestionList(props) {
       <li>{element.title}</li>  
     </Link>;
 
-  let questionList = questions.map(mapFunction);
+  let questionList = questions.map(mapFunction);  
 
   return (
     <>
@@ -19,9 +18,7 @@ function QuestionList(props) {
       <ul key={questions._id}>
         {questionList}
       </ul>
-      <Router>
         <AddQuestion path="/" addQuestion={props.addQuestion}></AddQuestion>
-      </Router>
     </>);
 }
 export default QuestionList;

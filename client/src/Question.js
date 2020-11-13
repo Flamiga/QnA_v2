@@ -8,8 +8,12 @@ function Question(props) {
     const id = props.id
     const question = props.getQuestion(id);
 
-    let answerList = question.answers.map(answer =>
-        <li key={answer._id}>{answer.text} <AddVotes addVote={answer.vote}></AddVotes></li>)
+    let answerList = question; 
+
+    if (question) {
+        question.answers.map(answer =>
+            <li key={answer._id}>{answer.text} <AddVotes addVote={props.vote}></AddVotes></li>)
+    }
 
     return (
         <>
@@ -20,7 +24,7 @@ function Question(props) {
             <ul>{answerList}</ul>
             <h3>Add an answer</h3>
             <AddAnswer id={question._id} addAnswer={props.addAnswer}></AddAnswer>
- 
+
         </>
 
 

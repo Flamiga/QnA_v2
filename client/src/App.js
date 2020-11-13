@@ -20,7 +20,7 @@ function App() {
       console.log("question", question);
     }
     fetchData();
-  }, [postCount]); // Fetch hver gang den post'er
+  }, [postCount]); // Fetch hver gang den post'er fx answer and question
 
   function getQuestion(id) {
     const questionObject = question.find(data => data._id === id);
@@ -45,7 +45,7 @@ function App() {
     });
     const data = await response.json();
     //setQuestion([...question, newQuestion]);
-    setPostCount(postCount + 1);
+    setPostCount(postCount + 1); //call my post count that fecths my data automatic 
     console.log("Question",data);
   }
 
@@ -64,7 +64,7 @@ function App() {
     console.log("answer",data);
   }
 
-  //callbackfunction
+  //callbackfunction så min addVote ved hvor den skal hente data fra
   async function addVote(vote, questionId, answerId){
     console.log(questionId, answerId);
     const url = `${API_URL}/QnA/${questionId}/answers/${answerId}/votes`;
