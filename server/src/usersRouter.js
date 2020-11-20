@@ -41,7 +41,8 @@ module.exports = secret => {
     res.status(501).json({ msg: "update user not implemented" });
   });
 
-  // This route takes a username and a password and creates an auth token
+  // This route takes a username and a password and creates an auth token 
+  //this is how to get token by getting the correct username and password
   router.post('/authenticate', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;

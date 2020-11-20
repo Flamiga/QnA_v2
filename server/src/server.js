@@ -33,34 +33,37 @@ async function createServer() {
 
 
   // Open paths that do not need login.
-// You can use various formats to define the open paths.
+  // You can use various formats to define the open paths.
 
-  const openPaths = 
+  const openPaths =
     // Open "/api/users/authenticate" for POST, DELETE, PUT requests
-  [{ url: "api/users/authenticate", methods: ["POST"] },
-  //{ url: "api/QnA", methods: ["GET"] },
-    // Open everything that doesn't begin with "/api"
-   /^(?!\/api).*/gim,
-   
-   { url: /\/api\/QnA\.*/gim, methods: ["GET"] }
+    [{ url: "/api/users/authenticate", methods: ["POST"] },
+      //{ url: "api/QnA", methods: ["GET"] },
+      // Open everything that doesn't begin with "/api"
+      /^(?!\/api).*/gim,
+    //this is a regular expression, opening everything with this router even after QnA like ID's
+    { url: /\/api\/QnA\.*/gim, methods: ["GET"] }
 
-  ];
+    ];
 
   //the secret value. the defualt is love is love 
-  const secret = process.env.SECRET || "love is love"; 
+  const secret = process.env.SECRET || "love is love";
 
   //validate the user token  using checkJwt middleware
-  app.use(checkJwt({secret, algorithms: ['HS512']}).unless({path: openPaths}));
+  //unless er exclude from the checkjwt
+  app.use(checkJwt({ secret, algorithms: ['HS512'] }).unless({ path: openPaths }));
 
   // this middleware checks the result of checkJwt above 
-  app.use((err, req, res, next)=> {
-    if(err.name === "Unauthorized Error") // if the user didnt  authroize correctly 
+  app.use((err, req, res, next) => {
+    if (err.name === "UnauthorizedError") // if the user didnt  authroize correctly 
     {
-      res.status(401).json({error: err.message});
-    }else {
+      res.status(401).json({ error: err.message });
+    } else {
       next(); //if no errors, forward  request to next middleware or route handler 
     }
-  }); 
+  });
+
+  //fra linje 49-63 er vigtige for at tjekke middleware og token
 
   const usersRouter = require("./usersRouter")(secret);
 
