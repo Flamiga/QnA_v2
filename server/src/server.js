@@ -11,6 +11,7 @@ const checkJwt = require("express-jwt");
 
 /**** Configuration ****/
 const app = express();
+
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/QnA';
 
 async function createServer() {

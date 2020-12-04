@@ -1,35 +1,38 @@
 import React from 'react';
-import { Link } from "@reach/router"
 import AddAnswer from './AddAnswer';
-import AddVotes from './AddVotes';
+import {Link} from '@reach/router';
+//import AddVotes from './AddVotes';
 
 
 function Question(props) {
-    const id = props.id
-    const question = props.getQuestion(id);
+    const { id, getQuestion } = props;
+    const question = getQuestion(id);
 
-    let answerList = question; 
+    //  let answerList = question; 
 
+    let content = <p>loading...</p>;
     if (question) {
-        question.answers.map(answer =>
-            <li key={answer._id}>{answer.text} <AddVotes addVote={props.vote}></AddVotes></li>)
-    }
 
-    return (
+        content = 
         <>
-            <Link to="/">Home</Link>
+<Link to="/">Back</Link>
             <h2>{question.title}</h2>
             <p>Description: {question.description}</p>
+
             <h2>Answers</h2>
-            <ul>{answerList}</ul>
-            <h3>Add an answer</h3>
-            <AddAnswer id={question._id} addAnswer={props.addAnswer}></AddAnswer>
+            <ul>
+                {question.answers.map((a, index) => <li key={index}>{a.description}</li>)}
+            </ul>
 
+            <AddAnswer question={question} addAnswer={props.addAnswer}></AddAnswer>
         </>
+    }
+        return (
+            <>
+                <div>{content}</div>
+            </>
+        );
 
+    };
 
-    );
-
-};
-
-export default Question; 
+    export default Question;
