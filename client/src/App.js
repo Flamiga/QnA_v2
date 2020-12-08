@@ -56,7 +56,7 @@ function App() {
     const newQuestion = {
       title: title,
       description: description,
-    } 
+    }   
 
     const url = `${API_URL}/QnA`;
     const response = await authService.fetch(url, {

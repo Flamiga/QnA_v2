@@ -20,6 +20,7 @@ module.exports = (questionDB) => {
   router.post('/', async (req, res) => {
     let title = req.body.title;
     let description = req.body.description;
+    
     const question = await questionDB.createQuestion(title, description);
 
     res.json(question);
