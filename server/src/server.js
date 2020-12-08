@@ -12,28 +12,17 @@ const checkJwt = require("express-jwt");
 /**** Configuration ****/
 const app = express();
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/QnA';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/questionDB';
 
-async function createServer() {
-  // Connect db
-  await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-
-  // Create data
-  const questionDB = require('./questionDB')(mongoose);
-  await questionDB.bootstrap();
-
-  // Require routes
-  const routes = require("./routes")(questionDB); // Inject mongoose into routes module
-
-  // Add middleware
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(morgan('combined'));
-  app.use(cors());
-  app.use(express.static(path.resolve('..', 'client', 'build')));
+// Add middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan('combined'));
+app.use(cors());
+app.use(express.static(path.resolve('..', 'client', 'build')));
 
 
-  // Open paths that do not need login.
+ // Open paths that do not need login.
   // You can use various formats to define the open paths.
 
   const openPaths =
@@ -64,10 +53,18 @@ async function createServer() {
     }
   });
 
-  //fra linje 49-63 er vigtige for at tjekke middleware og token
+async function createServer() {
+  // Connect db
+  await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
+  // Create data
+  const questionDB = require('./questionDB')(mongoose);
+  await questionDB.bootstrap();
+
+  // Require routes
+  const routes = require("./routes")(questionDB); // Inject mongoose into routes module
   const usersRouter = require("./usersRouter")(secret);
-
+ 
   // Add routes
   app.use("/api/QnA", routes);
   app.use("/api/users", usersRouter);
