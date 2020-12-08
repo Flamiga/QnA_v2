@@ -18,13 +18,13 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const url = `${API_URL}/QnA`;
-      console.log("url", url);
+      //console.log("url", url);
       const response = await authService.fetch(url);
       const data = await response.json();
       setQuestions(data);
       console.log("question", question);
     }
-   /* if (!authService.loggedIn()) {
+    /*if (!authService.loggedIn()) {
       login("frans", "hest");
     }*/
     fetchData();
@@ -57,6 +57,8 @@ function App() {
       title: title,
       description: description,
     }   
+    
+    console.log("new question", newQuestion)
 
     const url = `${API_URL}/QnA`;
     const response = await authService.fetch(url, {
