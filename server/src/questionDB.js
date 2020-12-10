@@ -27,7 +27,7 @@ module.exports = (mongoose) => {
       console.error("getQuestion:", error.message);
       return {};
     }
-  } 
+  }
 
   async function getAnswer(id) {
     try {
@@ -39,7 +39,10 @@ module.exports = (mongoose) => {
   }
 
   async function createQuestion(title, description) {
-    const question = new QnAModel({ title: title, description: description, answers: [] });
+    const question = new QnAModel( { title: title, description: description, answers: [] });
+    console.log(question);
+
+    //adding the qustion
     return question.save();
   }
 
