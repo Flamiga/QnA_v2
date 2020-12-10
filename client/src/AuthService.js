@@ -48,7 +48,7 @@ class AuthService {
     localStorage.removeItem("token");
   }
 
-  fetch(url, options) {
+   async fetch(url, options) {
     //console.log("url", url);
     const headers = {
       "Accept": "application/json",

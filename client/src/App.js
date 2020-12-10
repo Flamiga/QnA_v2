@@ -50,8 +50,6 @@ function App() {
 
   //callback så min addQuestion ved hvor den skal hente data fra
   async function addQuestion(title, description) {
-    console.log("title", title);
-    console.log("Description" , description);
 
     const newQuestion = {
       title: title,
@@ -62,14 +60,13 @@ function App() {
 
     const url = `${API_URL}/QnA`;
     const response = await authService.fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',      
       body: JSON.stringify(newQuestion),
     });
     const data = await response.json();
-    //setQuestion([...question, newQuestion]);
+    setQuestions([...question, newQuestion]);
     setPostCount(postCount + 1); //call my post count that fecths my data automatic 
-    console.log("Question", data);
+    console.log("token", data);
   }
 
   //callback så min addAnswer ved hvor den skal hente data fra
@@ -110,7 +107,7 @@ function App() {
       {authService.loggedIn() ? <pre>User is logged in</pre> : <pre>User is not logged in</pre>}
 
       <Router>
-        <QuestionList path="/" questions={question} addQuestion={addQuestion} >{question._id}</QuestionList>
+        <QuestionList path="/" questions={question} addQuestion={addQuestion} >{question._id}{question.addQuestion}</QuestionList>
         <Question path="/QnA/:id" getQuestion={getQuestion} addAnswer={addAnswer} /*addVote={addVote}*/></Question>
       </Router>
 
